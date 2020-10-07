@@ -1,0 +1,10 @@
+C:\Users\TerenceQu\Desktop\Personal Project\ThousandSunny\ThousandSunny.API\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\TerenceQu\Desktop\Personal Project\ThousandSunny\ThousandSunny.API\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\TerenceQu\Desktop\Personal Project\ThousandSunny\ThousandSunny.API\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\TerenceQu\Desktop\Personal Project\ThousandSunny\ThousandSunny.API\obj\Debug\netcoreapp3.1\ThousandSunny.API.csprojAssemblyReference.cache
+C:\Users\TerenceQu\Desktop\Personal Project\ThousandSunny\ThousandSunny.API\obj\Debug\netcoreapp3.1\ThousandSunny.API.AssemblyInfoInputs.cache
+C:\Users\TerenceQu\Desktop\Personal Project\ThousandSunny\ThousandSunny.API\obj\Debug\netcoreapp3.1\ThousandSunny.API.AssemblyInfo.cs
+C:\Users\TerenceQu\Desktop\Personal Project\ThousandSunny\ThousandSunny.API\obj\Debug\netcoreapp3.1\ThousandSunny.API.RazorTargetAssemblyInfo.cache
+C:\Users\TerenceQu\Desktop\Personal Project\ThousandSunny\ThousandSunny.API\obj\Debug\netcoreapp3.1\staticwebassets\ThousandSunny.API.StaticWebAssets.Manifest.cache
+C:\Users\TerenceQu\Desktop\Personal Project\ThousandSunny\ThousandSunny.API\obj\Debug\netcoreapp3.1\staticwebassets\ThousandSunny.API.StaticWebAssets.xml
+C:\Users\TerenceQu\Desktop\Personal Project\ThousandSunny\ThousandSunny.API\bin\Debug\netcoreapp3.1\ThousandSunny.API.exe
