@@ -7,9 +7,9 @@ using ThousandSunny.API.Security.Requirements;
 
 namespace ThousandSunny.API.Security.Handlers
 {
-    public class ThousandSunnyAuthorizationHandler : AuthorizationHandler<ThousandSunnyAuthorizationRequirement>
+    public class DefaultAuthHandler : AuthorizationHandler<DefaultAuthRequirement>
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ThousandSunnyAuthorizationRequirement requirement)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, DefaultAuthRequirement requirement)
         {
             context.Succeed(requirement);
 

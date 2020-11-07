@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ThousandSunny.API.Models
 {
-    public class ThousandSunnyContext : DbContext
+    public class TSPingContext : DbContext
     {
-        public ThousandSunnyContext(DbContextOptions<ThousandSunnyContext> options) : base(options)
+        public TSPingContext(DbContextOptions<TSPingContext> options) : base(options)
         {}
 
         public DbSet<Ping> Ping { get; set; }
