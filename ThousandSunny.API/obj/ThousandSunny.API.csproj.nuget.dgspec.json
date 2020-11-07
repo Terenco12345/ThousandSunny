@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TerenceQu\\Desktop\\Personal Project\\ThousandSunny\\ThousandSunny.API\\ThousandSunny.API.csproj": {}
+    "D:\\Web Apps\\ThousandSunny\\ThousandSunny.API\\ThousandSunny.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TerenceQu\\Desktop\\Personal Project\\ThousandSunny\\ThousandSunny.API\\ThousandSunny.API.csproj": {
+    "D:\\Web Apps\\ThousandSunny\\ThousandSunny.API\\ThousandSunny.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TerenceQu\\Desktop\\Personal Project\\ThousandSunny\\ThousandSunny.API\\ThousandSunny.API.csproj",
+        "projectUniqueName": "D:\\Web Apps\\ThousandSunny\\ThousandSunny.API\\ThousandSunny.API.csproj",
         "projectName": "ThousandSunny.API",
-        "projectPath": "C:\\Users\\TerenceQu\\Desktop\\Personal Project\\ThousandSunny\\ThousandSunny.API\\ThousandSunny.API.csproj",
-        "packagesPath": "C:\\Users\\TerenceQu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TerenceQu\\Desktop\\Personal Project\\ThousandSunny\\ThousandSunny.API\\obj\\",
+        "projectPath": "D:\\Web Apps\\ThousandSunny\\ThousandSunny.API\\ThousandSunny.API.csproj",
+        "packagesPath": "C:\\Users\\Teren\\.nuget\\packages\\",
+        "outputPath": "D:\\Web Apps\\ThousandSunny\\ThousandSunny.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\TerenceQu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Teren\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://tidywork.pkgs.visualstudio.com/TidyWork/_packaging/Tidy.Common/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -38,6 +39,24 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.10.9, )"
