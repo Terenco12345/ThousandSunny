@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ThousandSunny.API.Security.Requirements
 {
-    public class ThousandSunnyAuthorizationRequirement : IAuthorizationRequirement
+    public class DefaultAuthRequirement : IAuthorizationRequirement
     {
         public string TokenType { get; }
 
-        public ThousandSunnyAuthorizationRequirement(string tokenType)
+        public DefaultAuthRequirement(string tokenType)
         {
             TokenType = tokenType;
         }

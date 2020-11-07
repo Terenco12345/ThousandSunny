@@ -14,10 +14,10 @@ namespace ThousandSunny.API.Controllers
     [Route("[controller]")]
     public class PingController : ControllerBase
     {
-        private readonly ThousandSunnyContext _context;
+        private readonly TSPingContext _context;
         private readonly ILogger<PingController> _logger;
 
-        public PingController(ThousandSunnyContext context, ILogger<PingController> logger)
+        public PingController(TSPingContext context, ILogger<PingController> logger)
         {
             _context = context;
             _logger = logger;

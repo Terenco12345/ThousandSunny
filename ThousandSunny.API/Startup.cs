@@ -28,8 +28,8 @@ namespace ThousandSunny.API
         public void ConfigureServices(IServiceCollection services)
         {
             // Connect to Thousand Sunny SQL database
-            var thousandSunnyConnection = Configuration["ConnectionStrings:ThousandSunnyContext"];
-            services.AddDbContext<ThousandSunnyContext>(opt => opt.UseSqlServer(thousandSunnyConnection));
+            var thousandSunnyConnection = Configuration["ConnectionStrings:ThousandSunnyPingContext"];
+            services.AddDbContext<TSPingContext>(opt => opt.UseSqlServer(thousandSunnyConnection));
 
             ConfigureSecurity(services);
 
@@ -57,11 +57,11 @@ namespace ThousandSunny.API
             services.AddAuthorization(options =>
             {
                 options.DefaultPolicy = new AuthorizationPolicyBuilder()
-                    .AddRequirements(new ThousandSunnyAuthorizationRequirement("access"))
+                    .AddRequirements(new DefaultAuthRequirement("access"))
                     .RequireAuthenticatedUser()
                     .Build();
             });
-            services.AddSingleton<IAuthorizationHandler, ThousandSunnyAuthorizationHandler>();
+            services.AddSingleton<IAuthorizationHandler, DefaultAuthHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
