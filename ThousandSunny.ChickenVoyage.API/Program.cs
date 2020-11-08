@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace ThousandSunny.API
+namespace ThousandSunny.ChickenVoyage.API
 {
     public class Program
     {

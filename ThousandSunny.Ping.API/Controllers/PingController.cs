@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ThousandSunny.API.Models;
+using ThousandSunny.Ping.API.Models;
 
-namespace ThousandSunny.API.Controllers
+namespace ThousandSunny.Ping.API.Controllers
 {
     [Authorize]
     [ApiController]
@@ -47,9 +44,9 @@ namespace ThousandSunny.API.Controllers
         }
 
         [HttpPost("")]
-        public IActionResult PostPing(Ping ping)
+        public IActionResult PostPing(Models.Ping ping)
         {
-            Ping dupePing = _context.Ping.Find(ping.ID);
+            Models.Ping dupePing = _context.Ping.Find(ping.ID);
             if(dupePing == null)
             {
                 _context.Ping.Add(ping);

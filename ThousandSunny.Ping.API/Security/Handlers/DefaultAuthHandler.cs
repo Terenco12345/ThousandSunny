@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ThousandSunny.API.Security.Requirements;
+using ThousandSunny.Ping.API.Security.Requirements;
 
-namespace ThousandSunny.API.Security.Handlers
+namespace ThousandSunny.Ping.API.Security.Handlers
 {
     public class DefaultAuthHandler : AuthorizationHandler<DefaultAuthRequirement>
     {

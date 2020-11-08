@@ -4,15 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ThousandSunny.API.Security.Requirements
+namespace ThousandSunny.ChickenVoyage.API.Security.Requirements
 {
     public class DefaultAuthRequirement : IAuthorizationRequirement
     {
-        public string TokenType { get; }
 
-        public DefaultAuthRequirement(string tokenType)
+        public DefaultAuthRequirement()
         {
-            TokenType = tokenType;
+
         }
     }
 }

@@ -1,19 +1,18 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ThousandSunny.API.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
-using ThousandSunny.API.Security.Handlers;
-using ThousandSunny.API.Security.Requirements;
-using System.Text;
-using System;
+using ThousandSunny.ChickenVoyage.API.Models;
+using ThousandSunny.ChickenVoyage.API.Security.Handlers;
+using ThousandSunny.ChickenVoyage.API.Security.Requirements;
 
-namespace ThousandSunny.API
+namespace ThousandSunny.ChickenVoyage.API
 {
     public class Startup
     {
@@ -28,8 +27,8 @@ namespace ThousandSunny.API
         public void ConfigureServices(IServiceCollection services)
         {
             // Connect to Thousand Sunny SQL database
-            var thousandSunnyConnection = Configuration["ConnectionStrings:ThousandSunnyPingContext"];
-            services.AddDbContext<TSPingContext>(opt => opt.UseSqlServer(thousandSunnyConnection));
+            var thousandSunnyConnection = Configuration["ConnectionStrings:TSPingContext"];
+            services.AddDbContext<TSChickenVoyageContext>(opt => opt.UseSqlServer(thousandSunnyConnection));
 
             ConfigureSecurity(services);
 
@@ -57,7 +56,7 @@ namespace ThousandSunny.API
             services.AddAuthorization(options =>
             {
                 options.DefaultPolicy = new AuthorizationPolicyBuilder()
-                    .AddRequirements(new DefaultAuthRequirement("access"))
+                    .AddRequirements(new DefaultAuthRequirement())
                     .RequireAuthenticatedUser()
                     .Build();
             });
