@@ -8,8 +8,10 @@ namespace ThousandSunny.Ping.API.Security.Requirements
 {
     public class DefaultAuthRequirement : IAuthorizationRequirement
     {
+
         public DefaultAuthRequirement()
         {
+
         }
     }
 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ThousandSunny.ChickenVoyage.API.Security.Requirements
 {
-    public class DefaultAuthRequirement : IAuthorizationRequirement
+    public class UserIsValidRequirement : IAuthorizationRequirement
     {
 
-        public DefaultAuthRequirement()
+        public UserIsValidRequirement()
         {
 
         }

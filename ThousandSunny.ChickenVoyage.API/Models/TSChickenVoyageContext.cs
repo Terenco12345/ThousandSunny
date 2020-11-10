@@ -10,5 +10,10 @@ namespace ThousandSunny.ChickenVoyage.API.Models
     {
         public TSChickenVoyageContext(DbContextOptions<TSChickenVoyageContext> options) : base(options)
         {}
+
+        /// <summary>
+        /// User table, holds account information for users.
+        /// </summary>
+        public DbSet<User> User { get; set; } 
     }
 }

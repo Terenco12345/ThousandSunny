@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -7,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
+using ThousandSunny.ChickenVoyage.API.Config;
 using ThousandSunny.ChickenVoyage.API.Models;
 using ThousandSunny.ChickenVoyage.API.Security.Handlers;
 using ThousandSunny.ChickenVoyage.API.Security.Requirements;
+using ThousandSunny.ChickenVoyage.API.Utils;
 
 namespace ThousandSunny.ChickenVoyage.API
 {
@@ -27,7 +29,7 @@ namespace ThousandSunny.ChickenVoyage.API
         public void ConfigureServices(IServiceCollection services)
         {
             // Connect to Thousand Sunny SQL database
-            var thousandSunnyConnection = Configuration["ConnectionStrings:TSPingContext"];
+            var thousandSunnyConnection = Configuration.GetTSChickenVoyageContextConnectionString();
             services.AddDbContext<TSChickenVoyageContext>(opt => opt.UseSqlServer(thousandSunnyConnection));
 
             ConfigureSecurity(services);
@@ -41,26 +43,21 @@ namespace ThousandSunny.ChickenVoyage.API
         /// <param name="services"></param>
         private void ConfigureSecurity(IServiceCollection services)
         {
+            // Configure authentication to use JWT
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
-                var serviceTokenSecret = Configuration["Security:AuthTokenSecret"];
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateLifetime = false,
-                    ValidateAudience = false,
-                    ValidateIssuer = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(serviceTokenSecret))
-                };
+                options.TokenValidationParameters = JWTUtils.GenerateTokenValidationParameters(Configuration);
             });
 
+            // Configure authorization
             services.AddAuthorization(options =>
             {
                 options.DefaultPolicy = new AuthorizationPolicyBuilder()
-                    .AddRequirements(new DefaultAuthRequirement())
+                    .AddRequirements(new UserIsValidRequirement())
                     .RequireAuthenticatedUser()
                     .Build();
             });
-            services.AddSingleton<IAuthorizationHandler, DefaultAuthHandler>();
+            services.AddScoped<IAuthorizationHandler, UserIsValidHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,8 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
 using ThousandSunny.Ping.API.Models;
-using ThousandSunny.Ping.API.Security.Requirements;
 using ThousandSunny.Ping.API.Security.Handlers;
+using ThousandSunny.Ping.API.Security.Requirements;
 
 namespace ThousandSunny.Ping.API
 {
