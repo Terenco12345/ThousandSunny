@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using ThousandSunny.ChickenVoyage.API.Models;
@@ -44,7 +45,7 @@ namespace ThousandSunny.API.Controllers
             User duplicateUser = _context.User.SingleOrDefault(user => user.Email == registerRequest.Email);
             if (duplicateUser != null)
             {
-                return Forbid("A user already exists with this email.");
+                return Unauthorized(new { Message = "Email already exists." });
             }
 
             // Generate a new user and add it to the database
@@ -60,7 +61,15 @@ namespace ThousandSunny.API.Controllers
             _context.User.Add(user);
             _context.SaveChanges();
 
-            return Ok("Registered user successfully.");
+            return Ok(
+                new { 
+                    Message = "Registered user successfully.",
+
+                    DisplayName = user.DisplayName,
+                    Email = user.Email,
+                    CreationDate = user.CreationDate.ToString()
+                }
+            );
         }
 
         /// <summary>
@@ -75,18 +84,29 @@ namespace ThousandSunny.API.Controllers
             User user = _context.User.SingleOrDefault(user => user.Email == loginRequest.Email);
             if (user == null)
             {
-                return Unauthorized("Could not find user with this email.");
+                _logger.LogInformation($"{loginRequest.Email} tried to log in, but no user was found under that email. ");
+                return Unauthorized(new { Message = "Email is not registered to any user." });
             }
             bool verified = HashUtils.VerifyHashedPassword(user.Password, loginRequest.Password);
             if(!verified)
             {
-                return Unauthorized("Password was wrong.");
+                _logger.LogInformation($"{loginRequest.Email} tried to log in, but failed to provide correct password. ");
+                return Unauthorized(new { Message = "Incorrect password." });
             }
 
             string token = JWTUtils.GenerateTokenFromUser(_configuration, user.Id);
-            HttpContext.Response.Headers.Add("Authorization", "Bearer " + token);
 
-            return Ok("User logged in successfully.");
+            _logger.LogInformation($"{loginRequest.Email} logged in successfully, and generated a token.");
+            return Ok(
+                new { 
+                    Message = "User logged in successfully.", 
+                    Token = token,
+
+                    DisplayName = user.DisplayName,
+                    Email = user.Email,
+                    CreationDate = user.CreationDate.ToString()
+                }
+            );
             
         }
 
@@ -97,20 +117,31 @@ namespace ThousandSunny.API.Controllers
         [HttpGet("")]
         public IActionResult GetUserProfile()
         {
+            // Get userId from JWT identity
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            string userId = identity.FindFirst(ClaimsIdentity.DefaultNameClaimType).Value;
+
             try
             {
-                // Get userId from JWT identity
-                ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-                string userId = identity.FindFirst(ClaimsIdentity.DefaultNameClaimType).Value;
-
                 // Get user from context
                 User user = _context.User.Find(Guid.Parse(userId));
 
+                _logger.LogInformation($"{user.Email} retrieved their profile information. ");
                 // Return OK
-                return Ok(user);
+                return Ok(new 
+                {
+                    Message = "Profile obtained successfully.",
+
+                    DisplayName = user.DisplayName, 
+                    Email = user.Email, 
+                    CreationDate = user.CreationDate.ToString() 
+                });
             } catch
             {
-                return Unauthorized("User does not exist.");
+                _logger.LogInformation($" {userId} tried to retrieve their profile information, but failed. ");
+                return NotFound(new { 
+                    Message = "Could not find profile."
+                });
             }
         }
 
@@ -122,7 +153,11 @@ namespace ThousandSunny.API.Controllers
         public IActionResult Logout()
         {
             HttpContext.Response.Headers.Add("Authorization", "");
-            return Ok("User logged out successfully.");
+            return Ok(new 
+                { 
+                    Message = "User logged out successfully." 
+                }
+            );
         }
     }
 }

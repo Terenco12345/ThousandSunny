@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ThousandSunny.ChickenVoyage.API.Config
 {
+    /**
+     * This class provides extension methods to IConfiguration which enable retrieving
+     * important config values.
+     */
     public static class ConfigExtensions
     {
         // Connection Strings

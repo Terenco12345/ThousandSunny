@@ -18,6 +18,8 @@ namespace ThousandSunny.ChickenVoyage.API
 {
     public class Startup
     {
+        readonly string AllowChickenVoyageWebCORS = "ChickenVoyageWebCORSPolicy";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,6 +35,7 @@ namespace ThousandSunny.ChickenVoyage.API
             services.AddDbContext<TSChickenVoyageContext>(opt => opt.UseSqlServer(thousandSunnyConnection));
 
             ConfigureSecurity(services);
+            ConfigureCORS(services);
 
             services.AddControllers();
         }
@@ -60,6 +63,20 @@ namespace ThousandSunny.ChickenVoyage.API
             services.AddScoped<IAuthorizationHandler, UserIsValidHandler>();
         }
 
+        private void ConfigureCORS(IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: AllowChickenVoyageWebCORS,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:4200")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod();
+                                  });
+            });
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -71,6 +88,8 @@ namespace ThousandSunny.ChickenVoyage.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(AllowChickenVoyageWebCORS);
 
             app.UseAuthentication();
             app.UseAuthorization();

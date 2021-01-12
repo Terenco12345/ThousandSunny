@@ -28,20 +28,23 @@ namespace ThousandSunny.ChickenVoyage.API.Security.Handlers
             Claim userIdClaim = identity.FindFirst(ClaimsIdentity.DefaultNameClaimType);
             if (userIdClaim == null)
             {
+                _logger.LogInformation($"No user claim was found.");
                 context.Fail();
                 return Task.CompletedTask;
             }
 
-            _logger.LogInformation("Checking to see if user " + userIdClaim.Value + " is valid.");
+            _logger.LogInformation($"Checking to see if user {userIdClaim.Value} is valid.");
 
             // Get user from context
             User user = _dbContext.User.Find(Guid.Parse(userIdClaim.Value));
             if (user == null)
             {
+                _logger.LogInformation($"Could not find {userIdClaim.Value}'s user.");
                 context.Fail();
             }
             else
             {
+                _logger.LogInformation($"{userIdClaim.Value}'s user was found as {user.Email}.");
                 context.Succeed(requirement);
             }
 
